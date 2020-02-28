@@ -157,7 +157,7 @@ public class SimpleList
 			}
 			list = tempArray;
 		}
-		list[arraySize - 1] = appendElement;
+		list[count] = appendElement;
 		count++;
 	}
 	
@@ -191,8 +191,11 @@ public class SimpleList
 	
 	/**
 	 * Returns the size of all possible locations in the list
+	 * @return returns the size of the array
 	 */
-	public int size() {
+	public int size() 
+	{
 		return arraySize;
 	}
+	
 }
