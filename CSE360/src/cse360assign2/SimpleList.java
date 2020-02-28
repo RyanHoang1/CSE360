@@ -30,15 +30,17 @@ public class SimpleList
 	
 	/**
 	 * add method will add the parameter to the first index of the list. The rest of the list will shift to the right and the element
-	 * at the last index will be removed. count will also be updated
+	 * at the last index will be removed. count will also be updated. If the list is full, then the list will increase in size by 50%.
 	 * @param element to be added to list
 	 */
 	public void add(int addElement) 
 	{
-		if(count == list.length) {
+		if(count == list.length) 
+		{
 			arraySize = (int)(arraySize * 1.5);
 			int[] tempArray = new int[arraySize];
-			for(int listIterator = 0; listIterator < count; listIterator++) {
+			for(int listIterator = 0; listIterator < count; listIterator++) 
+			{
 				tempArray[listIterator] = list[listIterator];
 			}
 			list = tempArray;
@@ -53,7 +55,8 @@ public class SimpleList
 	
 	/**
 	 * remove method will remove the parameter from the list. The elements to the right of the index of the parameter will shift 
-	 * to the left. the count will be updated
+	 * to the left. the count will be updated. If the list has more than 25% empty spaces, then the list will be decreased by 
+	 * 25% of its size.
 	 * @param element to be removed from list
 	 */
 	public void remove(int removeElement) 
@@ -75,6 +78,16 @@ public class SimpleList
 				}
 				count--;
 			}
+		}
+		if(count < (int)(arraySize * .75) && count >= 1) 
+		{
+			arraySize = (int)(arraySize * .75);
+			int[] tempArray = new int[arraySize];
+			for(int listIterator = 0; listIterator < count; listIterator++) 
+			{
+				tempArray[listIterator] = list[listIterator];
+			}
+			list = tempArray;
 		}
 	}
 	
