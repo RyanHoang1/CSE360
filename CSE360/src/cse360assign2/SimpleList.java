@@ -14,6 +14,7 @@ package cse360assign2;
 
 public class SimpleList 
 {
+	int arraySize;
 	int[] list;
 	int count;
 	
@@ -22,30 +23,38 @@ public class SimpleList
 	 */
 	SimpleList() 
 	{
-		list = new int[10];
+		arraySize = 10;
+		list = new int[arraySize];
 		count = 0;
 	}
 	
 	/**
 	 * add method will add the parameter to the first index of the list. The rest of the list will shift to the right and the element
 	 * at the last index will be removed. count will also be updated
+	 * @param element to be added to list
 	 */
 	public void add(int addElement) 
 	{
-		for(int listIterator = 9; listIterator > 0; listIterator--) 
+		if(count == list.length) {
+			arraySize = (int)(arraySize * 1.5);
+			int[] tempArray = new int[arraySize];
+			for(int listIterator = 0; listIterator < count; listIterator++) {
+				tempArray[listIterator] = list[listIterator];
+			}
+			list = tempArray;
+		}
+		for(int listIterator = arraySize - 1; listIterator > 0; listIterator--) 
 		{
 			list[listIterator] = list[listIterator - 1];
 		}
 		list[0] = addElement;
-		if(count < 10) 
-		{
-			count++;
-		}
+		count++;
 	}
 	
 	/**
 	 * remove method will remove the parameter from the list. The elements to the right of the index of the parameter will shift 
 	 * to the left. the count will be updated
+	 * @param element to be removed from list
 	 */
 	public void remove(int removeElement) 
 	{
@@ -71,6 +80,7 @@ public class SimpleList
 	
 	/**
 	 * count method returns the count of the number of elements inside the list.
+	 * @return returns count
 	 */
 	public int count() 
 	{
@@ -79,6 +89,7 @@ public class SimpleList
 	
 	/**
 	 * toString method returns the elements of the list in a string with spaces
+	 * @return returns list
 	 */
 	public String toString() 
 	{
@@ -100,6 +111,8 @@ public class SimpleList
 	/**
 	 * search method will return the index of the parameter element. If parameter element does
 	 * not exist within the list, then -1 will be returned instead.
+	 * @param element to be searched
+	 * @return returns index of searched element
 	 */
 	public int search(int searchElement) 
 	{
