@@ -61,13 +61,13 @@ public class SimpleList
 	 */
 	public void remove(int removeElement) 
 	{
-		for(int listIterator = 0; listIterator < 10; listIterator++) 
+		for(int listIterator = 0; listIterator < arraySize; listIterator++) 
 		{
 			if(list[listIterator] == removeElement) 
 			{
-				for(int adjust = listIterator; adjust < 10; adjust++) 
+				for(int adjust = listIterator; adjust < arraySize; adjust++) 
 				{
-					if(adjust == 9) 
+					if(adjust == arraySize - 1) 
 					{
 						list[adjust] = 0;
 					}
@@ -130,7 +130,7 @@ public class SimpleList
 	public int search(int searchElement) 
 	{
 		int result = -1;
-		for(int index = 0; index < 10; index++) 
+		for(int index = 0; index < arraySize; index++) 
 		{
 			if(list[index] == searchElement) 
 			{
@@ -138,5 +138,61 @@ public class SimpleList
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * appends the parameter to the end of the list. If the list is full, then the list if increased in size
+	 * by 50%. Update count
+	 * @param element to be appended to end of list
+	 */
+	public void append(int appendElement) 
+	{
+		if(count == list.length) 
+		{
+			arraySize = (int)(arraySize * 1.5);
+			int[] tempArray = new int[arraySize];
+			for(int listIterator = 0; listIterator < count; listIterator++) 
+			{
+				tempArray[listIterator] = list[listIterator];
+			}
+			list = tempArray;
+		}
+		list[arraySize - 1] = appendElement;
+		count++;
+	}
+	
+	/**
+	 * Returns the first element in the list. Returns -1 if list is empty
+	 * @return returns the first element in the list
+	 */
+	public int first() 
+	{
+		int result = -1;
+		if(count != 0) 
+		{
+			result = list[0];
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns the last element in the list. Returns -1 if list is empty
+	 * @return returns the last element in the list
+	 */
+	public int last() 
+	{
+		int result = -1;
+		if(count != 0) 
+		{
+			result = list[count - 1];
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns the size of all possible locations in the list
+	 */
+	public int size() {
+		return arraySize;
 	}
 }
